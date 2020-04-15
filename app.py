@@ -1,38 +1,15 @@
-from flask import Flask, jsonify, request
+from flask import Flask
+from flask_restful import Api
+from resources.routes import initialize_routes
+from database.db import initialize_db
 
 app = Flask(__name__)
+api = Api(app)
 
-movies = [
-    {
-        "name": "The Shawshank Redemption",
-        "casts": ["Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler"],
-        "genres": ["Drama"]
-    },
-    {
-       "name": "The Godfather ",
-       "casts": ["Marlon Brando", "Al Pacino", "James Caan", "Diane Keaton"],
-       "genres": ["Crime", "Drama"]
-    }
-]
+app.config['MONGODB_SETTINGS'] = {
+    'host': 'mongodb://localhost/movie-bag'
+}
 
-@app.route("/movies")
-def get_movies():
-    return jsonify(movies), 200
-
-@app.route("/movies", methods=['POST'])
-def add_movie():
-    movie = request.get_json()
-    movies.append(movie)
-    return {'id': len(movies)}, 200
-
-@app.route('/movies/<int:index>', methods=['PUT'])
-def update_movie(index):
-    movie = request.get_json()
-    movies[index] = movie
-    return jsonify(movies[index]), 200
-
-@app.route('/movies/<int:index>', methods=['DELETE'])
-def delete_movie(index):
-    movies.app(index)
-    return 'None', 200
+initialize_db(app)
+initialize_routes(api)
 app.run()
