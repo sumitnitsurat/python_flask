@@ -4,11 +4,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pylint = "*"
 
 [packages]
 flask = "*"
 flask-mongoengine = "*"
 flask-restful = "*"
+pyexcel-xls = "*"
+flask-cors = "*"
+gspread = "*"
+oauth2client = "*"
 
 [requires]
 python_version = "3.8"
