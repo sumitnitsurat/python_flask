@@ -5,7 +5,7 @@ from database.db import initialize_db
 from flask_cors import CORS
 
 app = Flask(__name__)
-cors = CORS(app)
+cors = CORS(app, resources={r"/api/*": {"Access-Control-Allow-Origin": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
 

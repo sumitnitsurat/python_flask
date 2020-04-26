@@ -9,4 +9,4 @@ import json
 class RecipeApi(Resource):
     def get(self):
         foodlist = fetchExcelFoodList()
-        return foodlist
+        return foodlist, {'Access-Control-Allow-Origin': '*'} 
